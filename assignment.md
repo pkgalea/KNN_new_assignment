@@ -144,6 +144,8 @@ Take a look at your three graphs.  What would the three different models predict
 
 ![new point](images/knn_new_point.png)
 
+-----
+## Part 3 - Unseen Data
 
 #### 14. Now lets look at some unseen data. 
 
@@ -186,7 +188,7 @@ Find the k that gives the maximum accuracy.  There'll be several values of k for
 
 "I chose a KNN model with k = ____________ and my accuracy on unseen data was __________ "
 
-
+-----
 ## Part 4 - Scale up
 
 ####  18.  Get the data set with all columns.

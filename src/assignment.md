@@ -183,19 +183,11 @@ Pick a k where the accuracy is the highest.   There'll be several answers.  Pick
 
 ## Part 4 - Scale up
 
-y = df["wheat_type"]
-X = df.loc[:,["compactness", "groove_length", "area", "perimeter", "kernel_length", "kernel_width", "asymmetry"]]
-#X = np.array(df.drop("wheat_type", axis=1))
+####  18.  Get the data set with all columns.
 
-X_train = np.array(X.loc[:170])
-X_test = np.array(X.loc[170:])
-y_train = np.array(y.loc[:170])
-y_test = np.array(y.loc[170:])
+Import the dataset again, but this time don't drop any columns.  We now have 7 features instead of 2. 
 
-
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
+Split the data set into X_train, y_train, X_test, y_test again.  Don't forgot to use Standard Scaler to scale just like you did above!
 
 
 #### 19.  Do some EDA on all 7 features.
@@ -208,3 +200,13 @@ Use seaborn's pair plot to get look at how all fields interact with eachother to
 import seaborn as sns
 sns.pairplot(df, hue="wheat_type")
 ```
+
+#### 20. Pick the best k.
+
+Run your accuracy loop from question 17 on the fully scaled data and pick a k that gives you  the best possible accuracy.
+
+Do more features improve your results?
+
+Report your results:
+
+"I chose a KNN model with a k of __________ and my accuracy is ___________"

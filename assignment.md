@@ -98,7 +98,7 @@ Give this a run and make sure you understand what's going on with it, then imple
 
 Create a new KNNClassifer class with k=5 and then call `fit` passing in X_train and y_train.  Now call the plot_predictions function again but this time pass your classifer object into the function as the classifier parameter.  The background colors represent the prediction areas for your model.  It should look like the image below.  Do these predictions look kinda weird?  What do you think the problem is?
 
-![confounders](../images/knn_unscaled.png)
+![confounders](images/knn_unscaled.png)
 
 #### 9. Hmm, looks kinda weird.  What's going on here?   
 
@@ -114,7 +114,7 @@ X_test = scaler.transform(X_test)
 
 Then try calling plot_predictions again.
 
-![scaled](../images/knn_correct.png)
+![scaled](images/knn_correct.png)
 
 #### 10. OK, that looks better.   Check how many are incorrect.
 
@@ -132,7 +132,7 @@ Plot the graph with k = 170 (the size of the dataset.)  How many incorrect value
 Imagine you had a new kernel that you did not know the classification of and it had a _scaled_ compactness of 2 and a _scaled_ groove_length of -.5.
 Take a look at your three graphs.  What would the three different models predict for this data point?  Going by your rule of thumb, which do you think makes the most sense?
 
-![new point](../images/knn_new_point.png)
+![new point](images/knn_new_point.png)
 
 #### 14. Now lets look at some unseen data. 
 

@@ -13,7 +13,7 @@ def euclidean_distance(a, b):
     -------
     distance: float
     """
-    return np.linalg.norm(a-b) 
+    pass
 
 
 
@@ -54,9 +54,6 @@ class KNNClassifier:
         self.y = y
         return self
 
-    def get_all_distances_from_point (self,p):
-        return np.array([self.distance(x, p) for x in self.X])
-
     def predict(self, X):
         """Return the predicted values for the input X test data.
 
@@ -75,35 +72,8 @@ class KNNClassifier:
             Predicted values for each test data sample.
 
         """
-        def Most_Common(lst):
-            data = Counter(lst)
-            return data.most_common(1)[0][0]
-
-        predictions = []
-        for x in X:
-            dists = self.get_all_distances_from_point( x)
-            nearest_k = self.y[dists.argsort()[:self.k]]
-            mc_list = Counter(nearest_k).most_common(3)
-            most_common_count = mc_list[0][1]
-            most_common_values = [mc[0] for mc in mc_list if mc[1] == most_common_count]
-  #    print(nearest_k, most_common_values)
-            predictions.append(np.random.choice(most_common_values, size=1)[0])
-        return np.array(predictions)
-
+        pass
 
         
             
 
-
-
-#if __name__ == '__main__':
-
-   # X, y = make_data(n_features=2, n_pts=300, noise=0.1)
-    #y = y.reshape(30)
-  #  model = KNNRegressor(distance=cosine_distance)
-  #  model.fit(X, y)
-    #predictions = model.predict(X)
-  #  print(model.predict([[0,0]]))
- #   fig, ax = plt.subplots()
-  #  plot_predictions(ax, model, X, y)
-  #  fig.show()

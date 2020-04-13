@@ -46,10 +46,12 @@ fig, ax = plt.subplots()
 plot_predictions(ax, X_train, y_train)
 ```
 
+
 #### 4. Have a look at what you've just plotted.  
 
 If you were asked for a quick "rule of thumb" for classifying wheat type based only on compactness and kernel length, what would you say?
 
+----
 ## Part 2 - Build the model
 
 #### 5. Let's get some machine learning going.  
@@ -68,9 +70,11 @@ else:
     print ("Not quite.")
 ```
 
+
 #### 6. Now implement the `fit` function of the KNNClassifier class. 
 
 Remember, in KNN, fit just stores the data.  This will probably be the easiest function you will write in this entire course.
+
 
 #### 7. Next, implement the `predict` function.
 
@@ -94,11 +98,13 @@ print("Here's b sorted in order of a:", y[x.argsort()])
 ```
 Give this a run and make sure you understand what's going on with it, then implement the ```predict``` function.
 
+
 #### 8. Now,  test your classifier.  
 
 Create a new KNNClassifer class with k=5 and then call `fit` passing in X_train and y_train.  Now call the plot_predictions function again but this time pass your classifer object into the function as the classifier parameter.  The background colors represent the prediction areas for your model.  It should look like the image below.  Do these predictions look kinda weird?  What do you think the problem is?
 
 ![confounders](images/knn_unscaled.png)
+
 
 #### 9. Hmm, looks kinda weird.  What's going on here?   
 
@@ -116,16 +122,20 @@ Then try calling plot_predictions again.
 
 ![scaled](images/knn_correct.png)
 
+
 #### 10. OK, that looks better.   Check how many are incorrect.
 
 Visually, get a rough count of how many classifications are different than their prediction regions.  
+
 
 #### 11.  Try a small k.
 
 In a new cell, try setting k=1 in your KNNClassifier class and calling plot_predictions again.  How many incorrect predictions now?  Is k=1 better than k=5?
 
+
 #### 12. Try a very large k
 Plot the graph with k = 170 (the size of the dataset.)  How many incorrect values now? 
+
 
 #### 13.  Look at how the different models predict classifications.
 
@@ -134,11 +144,13 @@ Take a look at your three graphs.  What would the three different models predict
 
 ![new point](images/knn_new_point.png)
 
+
 #### 14. Now lets look at some unseen data. 
 
 Call plot_predictions again, but this time pass in X_test and y_test for the X_test and y_test parameters.  Pass in a classifier with k=5, fit to X_train and y_train.  How well do you think your model did?
 
 ```plot_predictions(ax, X_train, y_train, classifier, X_test, y_test)```
+
 
 #### 15.  Try again with k=1.  
 
@@ -163,6 +175,7 @@ Then call call this function on your classifier to see what percentage of classi
     y_pred = classifier.predict(X_test)
     accuracy = get_accuracy(y_pred, y_test)
 ```
+
 
 #### 17. Try different values of k.
 
@@ -195,6 +208,7 @@ Use seaborn's pair plot to get look at how all fields interact with eachother to
 import seaborn as sns
 sns.pairplot(df, hue="wheat_type")
 ```
+
 
 #### 20. Pick the best k.
 

@@ -136,13 +136,13 @@ Take a look at your three graphs.  What would the three different models predict
 
 #### 14. Now lets look at some unseen data. 
 
-Call plot_predictions again, but this time pass in X_test and y_test instead of None.  Pass in a classifier with k=5 fit to X_train and y_train.  How well do you think your model did?
+Call plot_predictions again, but this time pass in X_test and y_test for the X_test and y_test parameters.  Pass in a classifier with k=5, fit to X_train and y_train.  How well do you think your model did?
 
 ```plot_predictions(ax, X_train, y_train, classifier, X_test, y_test)```
 
 #### 15.  Try again with k=1.  
 
-When we were training the model we got all of our points correct.  Why is this no longer the case with unseen data? 
+Change k=1, fit the classifier to the training data and call plot_predictions again.  When we were training the model we got all of our points correct.  Why is this no longer the case with unseen data? 
 
 
 #### 16. Quantify the accuracy of your model.
@@ -168,7 +168,7 @@ Then call call this function on your classifier to see what percentage of classi
 
 Loop over all possible values of k from 1 to 170 and instantiate a classifier with each value of k, fit the model to X_train and y_train and get the accuracy of the model predicting on X_test.  Don't use plot_predictions here; it will likely be too slow.
 
-Pick a k where the accuracy is the highest.   There'll be several answers.  Pick the one with the lowest k and report your results.
+Find the k that gives the maximum accuracy.  There'll be several values of k for which the accuracy is the highest.  Pick the one with the lowest k and report your results.
 
 
 "I chose a KNN model with k = ____________ and my accuracy on unseen data was __________ "
@@ -180,7 +180,9 @@ Pick a k where the accuracy is the highest.   There'll be several answers.  Pick
 
 Import the dataset again, but this time don't drop any columns.  We now have 7 features instead of 2. 
 
-Split the data set into X_train, y_train, X_test, y_test again.  Don't forgot to use Standard Scaler to scale just like you did above!
+Split the data set into X_train, y_train, X_test, y_test again.  
+
+Don't forgot to use Standard Scaler to scale just like you did above!
 
 
 #### 19.  Do some EDA on all 7 features.
@@ -196,7 +198,7 @@ sns.pairplot(df, hue="wheat_type")
 
 #### 20. Pick the best k.
 
-Run your accuracy loop from question 17 on the fully scaled data and pick a k that gives you  the best possible accuracy.
+Run your accuracy loop from question 17 on the fully scaled data and pick a k that gives you the best possible accuracy.
 
 Do more features improve your results?
 

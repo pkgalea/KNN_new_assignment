@@ -8,7 +8,7 @@ We are finally ready to make our first machine learning model.  In this assignme
 
 Read the `seed_dataset.csv` file into a dataframe.  
 
-Inspect the dataset.  This real dataset represents the results of x-rays into three different types of wheat kernels.  The first 7 columns are the attributes that the x-ray measured.  The `wheat_type`  represents the type of wheat kernel:
+Inspect the dataset.  This real dataset represents the results of x-rays into three different types of wheat kernels.  The first 7 columns are the measurements taken from the x-rays.  The `wheat_type` column represents the type of wheat kernel:
 
 1. Kama
 2. Rosa
@@ -38,7 +38,7 @@ We'll get way more into why we are doing this is future lectures.
 
 #### 3. Visualize the data.
 
-On this lecture we're not going to have you spend too much time wrestling with matplotlib. In the knn_visualization.py file, you'll find a function to plot the data called plot_predictions.  Import this final and  all this function and pass in a pyplot axis and your X and y.  For now, pass in None for classifier, X_test and y_test.  
+On this lecture we're not going to have you spend too much time wrestling with matplotlib. In the knn_visualization.py file, you'll find a function to plot the data called plot_predictions.  Import this function and pass in a pyplot axis, X_train and y_train.  For now, leave out classifier, X_test and y_test.  
 
 ```
 from knn_visualization import plot_predictions
@@ -54,7 +54,7 @@ If you were asked for a quick "rule of thumb" for classifying wheat type based o
 
 #### 5. Let's get some machine learning going.  
 
-We've given you a stub for the KNNClassifier class in the knn.py which you'll need to edit and then import into your notebook.  You'll need to fill in a few of the functions before we can apply it to our data set.   
+We've given you a stub for the KNNClassifier class in the knn.py which you'll need to edit and then import into your notebook.  You'll need to fill in a few of the functions before we can apply it to our data set.   Note that the default k value is 5.
 
 First, implement the `euclidean distance` function in the knn.py file which returns the euclidean distance between two vectors.  
 
@@ -68,21 +68,20 @@ else:
     print ("Not quite.")
 ```
 
-#### 6. Now implement the 'fit' function of the KNNClassifier class. 
+#### 6. Now implement the `fit` function of the KNNClassifier class. 
 
-Remember, in KNN, fit just stores the data.  This will probably be the easiest function you will write in this entire class.
+Remember, in KNN, fit just stores the data.  This will probably be the easiest function you will write in this entire course.
 
 #### 7. Next, implement the `predict` function.
 
 This function will implement this pseudocode:
 
 ```
-kNN:
     for every point in the dataset:
         calculate the distance between the point and x
         take the k points with the smallest distances to x 
-        find the most common value of y amongst the those k points. 
-        if more there is more than one most common value for y, randomly select one of them.
+        find the most common value of y amongst the those k points
+        if more there is more than one most common value for y, randomly select one of them
         return this value as our prediction
 ```
 
@@ -93,53 +92,47 @@ print("If a were to be sorted, it would use the following *indices* in order:", 
 b = np.array(['a', 'b', 'c', 'd', 'e', 'f','g'])
 print("Here's b sorted in order of a:", y[x.argsort()])
 ```
-
 Give this a run and make sure you understand what's going on with it, then implement the ```predict``` function.
 
 #### 8. Now,  test your classifier.  
 
-Create a new KNNClassifer class with k=5 and then call `fit` passing in X_train and y_train.  Now call the plot_predictions function again but this time pass your classifer into as the classifier parameter.  The background colors represent the prediction areas for your model.  Does it look kinda weird?  What do you think the problem is?
+Create a new KNNClassifer class with k=5 and then call `fit` passing in X_train and y_train.  Now call the plot_predictions function again but this time pass your classifer object into the function as the classifier parameter.  The background colors represent the prediction areas for your model.  It should look like the image below.  Do these predictions look kinda weird?  What do you think the problem is?
 
+![confounders](../images/knn_unscaled.png)
 
 #### 9. Hmm, looks kinda weird.  What's going on here?   
 
-The answer lies in the fact that the scale of the y-axis is on different magnitude than the scale of the x-axis.  So, the problem is that the groove_length is "bullying" the compactness and that's what's giving those weird horizontal lines in your prediction regions. 
+The answer lies in the fact that the scale of the y-axis is on different magnitude than the scale of the x-axis.  Since KNN depends on distance, this skews the results.  The compactness is "bullying" the groove_length and that's what's giving those weird horizontal lines in your prediction regions. 
 
-Use the StandardScaler class from sklearn and call `fit_transform` on your X_train and 
+Use the StandardScaler class from sklearn and call `fit_transform` on your X_train.  While you're at it, call `transform` on X_test.
 
 ``` 
 scaler = StandardScaler()
-X_train = fit_transform(X_train)
-X_test = transform(X_test)
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
 ```
-
 
 Then try calling plot_predictions again.
 
-
-
-classifier = KNNClassifier()
-classifier.fit(X_train, y_train)
-fig, ax = plt.subplots()
-plot_predictions(ax, X_train, y_train, classifier)
-
+![scaled](../images/knn_correct.png)
 
 #### 10. OK, that looks better.   Check how many are incorrect.
 
-Visually, get a rough count of how many classifications are different than their prediction regions. you have.  
+Visually, get a rough count of how many classifications are different than their prediction regions.  
 
 #### 11.  Try a small k.
 
-In a new cell, try setting k=1 in your KNNClassifier class and calling plot_predictions again.  How many incorrect values now?  Is k=1 better than k=5?
+In a new cell, try setting k=1 in your KNNClassifier class and calling plot_predictions again.  How many incorrect predictions now?  Is k=1 better than k=5?
 
 #### 12. Try a very large k
-Plot the graph with k = 170 (the size of the dataset.)  How many incorrect values now?  Should we keep k = 170?
+Plot the graph with k = 170 (the size of the dataset.)  How many incorrect values now? 
 
 #### 13.  Look at how the different models predict classifications.
 
 Imagine you had a new kernel that you did not know the classification of and it had a _scaled_ compactness of 2 and a _scaled_ groove_length of -.5.
 Take a look at your three graphs.  What would the three different models predict for this data point?  Going by your rule of thumb, which do you think makes the most sense?
 
+![new point](../images/knn_new_point.png)
 
 #### 14. Now lets look at some unseen data. 
 

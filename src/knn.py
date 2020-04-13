@@ -50,8 +50,7 @@ class KNNClassifier:
         -------
         self
         """
-        self.X = X
-        self.y = y
+        pass
         return self
 
     def predict(self, X):
